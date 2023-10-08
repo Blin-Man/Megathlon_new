@@ -59,8 +59,13 @@ public class AddBrand extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-			HttpSession session = request.getSession();
 			ArrayList<Brand> BrandList = new ArrayList<>();
+			String productName = request.getParameter("productName");
+			String description = request.getParameter("description");
+			double price = Double.parseDouble(request.getParameter("price"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
+			System.out.println ("Data: " + productName + description + price + quantity);
+			
 			
 			try {
 				
@@ -89,9 +94,12 @@ public class AddBrand extends HttpServlet {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
+			
+			
 			request.setAttribute("BrandList", BrandList);
-			RequestDispatcher rd = request.getRequestDispatcher("CreateProduct.jsp");
-			rd.forward(request, response);
+			String redirectURL = "/Megathlon/CreateProduct?pass=1&pn=" + productName + "&pr=" + price + "&desc=" + description + "&qty=" + quantity;
+			
+			response.sendRedirect(redirectURL);
 			out.println("</body>");
 			out.println("</html>");
 
