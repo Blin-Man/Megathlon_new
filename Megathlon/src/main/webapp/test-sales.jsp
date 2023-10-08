@@ -90,6 +90,41 @@
 													<option value="3">Defect Item</option>
 												</select>
 											</div>
+
+											<div class="form-group row">
+												<div class="col-6">
+													<label>Status</label> <select id="status"
+														name="stockStatus" class="form-control custom-select">
+														<option value="0" selected disabled>Choose Status
+															Type</option>
+														<option value="1">Stock Addition</option>
+														<option value="2">Stock Deduction</option>
+														<option value="3">Defect Item</option>
+													</select>
+												</div>
+												<div class="col-6">
+													<label>Product name</label> <select id="productSelect"
+														name="product" class="form-control custom-select">
+														<option hidden>Select Product Name</option>
+														<%
+														ArrayList<Product> productlist = (ArrayList<Product>) request.getAttribute("productlist");
+
+														for (Product p : productlist) {
+														%>
+														<option
+															<%-- value="<%= p.getProductID() %>" --%> 
+														value="<%=p.getProductName()%>"
+															data-supplier="<%=p.getSupplier()%>"
+															
+															data-price="<%=p.getPrice()%>"
+															data-quantity="<%=p.getQuantity()%>">
+															<%=p.getProductName()%></option>
+														<%
+														}
+														%>
+													</select>
+												</div>
+
 											<div class="col-6">
 												<label>Product name</label> <select id="productSelect"
 													name="product" class="form-control custom-select">
@@ -111,6 +146,7 @@
 													}
 													%>
 												</select>
+
 											</div>
 										</div>
 
